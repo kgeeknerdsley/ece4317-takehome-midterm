@@ -27,6 +27,9 @@ void randomPilePopulate(int pileArr[], int pileAmt) {
     }
 }
 
+//Prints the current state of all the piles
+//INPUT: Takes in pile array and length
+//OUTPUT: None
 void printPileState(int pileArr[], int pileAmt) {
     printf("\n");
 
@@ -39,6 +42,9 @@ void printPileState(int pileArr[], int pileAmt) {
     }
 }
 
+//Checks to see if the game is finished
+//INPUT: Takes in pile array and length
+//OUTPUT: Boolean, true = game finished, false = game not finished
 bool gameOver(int pileArr[], int pileAmt) {
     bool done = true;
 
@@ -58,7 +64,6 @@ int main() {
     int firstDecision = 0;
     int pileAmt = 0;
     
-
     bool playerTurn = false;
     int pilesXOR = 0;
     int bestPile = 0;
@@ -73,7 +78,7 @@ int main() {
     int pullChosen = 0;
     bool gameContinue = true;
 
-
+    //Choose settings
     cout << "Welcome to the game! Would you like:\n";
     cout << "   1) Manually populate the piles\n";
     cout << "   2) Randomly populate the piles\n";
@@ -91,12 +96,14 @@ int main() {
 
     cin >> pileAmt;
 
+    //new array with size of pile amount
     int piles [pileAmt] = {};
 
     if(firstDecision == 1) {
         playerTurn = true;
     }
 
+    //select whether random or manual pile value creation
     if(popDecision == 1) {
         manualPilePopulate(piles, pileAmt);
     } else {
@@ -105,9 +112,9 @@ int main() {
 
     printPileState(piles,pileAmt);
 
+    //game loop
     while(gameContinue) {
-        //game loop here
-        if(playerTurn) {
+        if(playerTurn) { //if it's the player's turn...
             validPile = false;
             validPull = false;
 
@@ -118,14 +125,14 @@ int main() {
                 cout << "\nPlease select the number of a pile to take from: ";
                 cin >> pileChosen;
 
-                if(pileChosen > pileAmt || pileChosen < 0 || piles[pileChosen-1] == 0) {
+                if(pileChosen > pileAmt || pileChosen < 0 || piles[pileChosen-1] == 0) { //cannot choose invalid piles bigger or smaller than list, or if 0
                     cout << "\nThat pile number is not valid, or depleted. Choose a non-depleted pile from the list.\n";
                 } else {
                     validPile = true;
                 }
             }
 
-            while(!validPull) {
+            while(!validPull) { //must have a valid number of sticks (not bigger than pile, and greater than 0)
                 cout << "Please select the number of sticks to remove from pile " << pileChosen << ": ";
                 cin >> pullChosen;
 
@@ -136,11 +143,11 @@ int main() {
                 }
             }
 
-            piles[pileChosen-1] = piles[pileChosen-1] - pullChosen;
+            piles[pileChosen-1] = piles[pileChosen-1] - pullChosen; //remove our requested amount
 
             cout << "\nYou remove " << pullChosen << " sticks from pile " << pileChosen << ".\n";
 
-            playerTurn = !playerTurn;
+            playerTurn = !playerTurn; //change the turn
             printPileState(piles,pileAmt);
         } else {
             //computer turn
@@ -148,6 +155,7 @@ int main() {
 
             cout << "\nComputer's turn!\n";
 
+            //get the global pile XOR (Nimsum)
             for(int i = 0; i < pileAmt; i++) {
                 if(i == 0) {
                     pilesXOR = piles[i];
@@ -156,6 +164,7 @@ int main() {
                 }
             }
 
+            //Test the nimsum against every pile. If the move can be made, do it
             for(int x = 0; x < pileAmt; x++) {
                 singlePileXOR = piles[x] ^ pilesXOR;
 
@@ -166,6 +175,7 @@ int main() {
                 }
             }
 
+            //if we couldn't make an advantageous move, make a random one
             if(foundGoodMove) {
                 piles[bestPile] = piles[bestPile] - bestMove;
             } else {
@@ -176,11 +186,11 @@ int main() {
             cout << "\nComputer removes " << bestMove << " sticks from pile " << bestPile + 1 << ".\n";
             
 
-            playerTurn = !playerTurn;
+            playerTurn = !playerTurn; //change turn
             printPileState(piles,pileAmt);
         }
 
-        if(gameOver(piles,pileAmt)) {
+        if(gameOver(piles,pileAmt)) { //test if the game is over
             gameContinue = false;
         }
     }
@@ -191,10 +201,6 @@ int main() {
     } else {
         cout << "Computer is the winner!\n";
     }
-
-    
-
-
 
     return 0;
 }
