@@ -77,6 +77,7 @@ int main() {
     bool validPull = false;
     int pullChosen = 0;
     bool gameContinue = true;
+    bool safePile = false;
 
     //Choose settings
     cout << "Welcome to the game! Would you like:\n";
@@ -179,7 +180,15 @@ int main() {
             if(foundGoodMove) {
                 piles[bestPile] = piles[bestPile] - bestMove;
             } else {
-                randomPile = rand() % pileAmt;
+                safePile = false;
+
+                while(safePile) {
+                    randomPile = rand() % pileAmt;
+                    if(piles[randomPile] != 0) {
+                        safePile = true;
+                    }
+                }
+                
                 piles[randomPile] = piles[randomPile] - (rand() % piles[randomPile] + 1);
             }
 
