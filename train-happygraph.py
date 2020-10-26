@@ -1,3 +1,6 @@
+#For question 6, by Kevin Worsley
+#ECE 4317 Takehome Midterm, Fall 2020
+
 import tensorflow as tf
 import numpy as np
 from tensorflow import keras
