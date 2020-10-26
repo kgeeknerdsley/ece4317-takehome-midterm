@@ -35,7 +35,7 @@ class Queen:
         diagR = 0
         diagC = 0
 
-        for i in range(8):
+        for i in range(self.colPos, 8):
             #horizontal motion
             if(board[self.rowPos][i] != 0):
                 #print("Found a queen on the horizontal at position (" + str(self.rowPos) + "," + str(i) + ")\n")
@@ -44,35 +44,8 @@ class Queen:
 
                 if(toAdd != (self.number, self.number)):
                     possibleHits.append(toAdd)
-
-            #vertical motion
-            if(board[i][self.colPos] != 0):
-                #print("Found a queen on the vertical at position (" + str(i) + "," + str(self.colPos) + ")\n")
-
-                toAdd = tuple((self.number,board[i][self.colPos]))
-
-                if(toAdd != (self.number, self.number)):
-                    possibleHits.append(toAdd)
         
         #yes, I know these diagonal moves are inefficient and bad
-
-        #downward left diagonal
-        diagR = self.rowPos
-        diagC = self.colPos
-        while(not downLeft): #downLeft goes true when we're done
-            if(board[diagR][diagC] != 0):
-                #print("Found a queen on the down left diagonal at position (" + str(diagR) + "," + str(diagC) + ")\n")
-
-                toAdd = tuple((self.number,board[diagR][diagC]))
-
-                if(toAdd != (self.number, self.number)):
-                    possibleHits.append(toAdd)
-
-            if(diagC == 0 or diagR == 7):
-                downLeft = True
-            else:
-                diagR = diagR + 1
-                diagC = diagC - 1
 
         #downward right diagonal
         diagR = self.rowPos
@@ -91,24 +64,6 @@ class Queen:
             else:
                 diagR = diagR + 1
                 diagC = diagC + 1
-
-        #upward left diagonal
-        diagR = self.rowPos
-        diagC = self.colPos
-        while(not upLeft):
-            if(board[diagR][diagC] != 0):
-                #print("Found a queen on the upper left diagonal at position (" + str(diagR) + "," + str(diagC) + ")\n")
-
-                toAdd = tuple((self.number,board[diagR][diagC]))
-
-                if(toAdd != (self.number, self.number)):
-                    possibleHits.append(toAdd)
-
-            if(diagC == 0 or diagR == 0):
-                upLeft = True
-            else:
-                diagR = diagR - 1
-                diagC = diagC - 1
 
         #upward right diagonal
         diagR = self.rowPos
