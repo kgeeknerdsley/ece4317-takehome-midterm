@@ -51,34 +51,26 @@ for column in range(8):
     if(column != 0):
         board[7][column-1] = 0
         board[queens[column-1].getOriginalRow()][queens[column-1].getOriginalCol()] = column
+        queens[column-1].setPosition(queens[column-1].getOriginalRow(),
+                                        queens[column-1].getOriginalCol()) #rowPos, colPos is fixed
 
     lastRPos = queens[column].originalRow #last known position of current column was original spot
     lastCPos = queens[column].originalCol
     
     for row in range(8):
         verifiedHits = []#reset verifiedHits for the new run
-        queens[column].setPosition(row,column) #queen object now knows their new spot
+        queens[column].setPosition(row, column) #queen object now knows their new spot
         board[row][column] = column+1 #set the new piece in board
         board[lastRPos][lastCPos] = 0 #unset the last piece's position
         
         #getSquareVal()...............................................................................
+        heuristic = 0
         for j in range(len(queens)): #for the entire queen list, find the hits
             queenHitList = []
             queenHitList = queens[j].findHitPairs(board) #might need reinitialization
-
-            for hit in range(len(queenHitList)): #for all the hits, test them
-                foundDuplicate = False
-                forwardHit = queenHitList[hit]
-                reversedHit = forwardHit[::-1]
-
-                for confirmedHit in range(len(verifiedHits)):# for every hit already found, check it against new hit
-                    if(reversedHit == verifiedHits[confirmedHit]):
-                        foundDuplicate = True
-
-                if(not foundDuplicate):
-                    verifiedHits.append(forwardHit)
+            heuristic = len(queenHitList) + heuristic
         #..................................................................................................
-        heuristicBoard[row][column] = len(verifiedHits)
+        heuristicBoard[row][column] = heuristic
 
         lastRPos = row
         lastCPos = column
