@@ -16,6 +16,7 @@ int main()
         
         int values [amt] = {};
     
+        //loop over and assign a value to each pile
         for(int i = 0; i < amt; i++) {
             cout << "Enter value for pile " << i + 1 << ": ";
             cin >> val;
@@ -25,15 +26,15 @@ int main()
             if(i == 0) {
                 result = val;
             } else {
-                result = result ^ val; //xor all the piles together
+                result = result ^ val; //xor all the piles together, for nimsum
             }
         }
     
         cout << "Nimsum (total XOR) is: " << result << "\n";
         
+        //XOR each pile by the nimsum to get the recommended move
         for(int j = 0; j < amt; j++) {
             cout << "XOR for pile of " << values[j] <<" is " << (values[j] ^ result) << "\n";
-            //cout << "Should remove " << values[j] - (values[j] ^ result) << " sticks from pile";
         }
 		
 		cout << "Stop? Y or N : ";
