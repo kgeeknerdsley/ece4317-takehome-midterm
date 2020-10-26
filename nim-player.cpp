@@ -189,7 +189,9 @@ int main() {
                     }
                 }
                 
-                piles[randomPile] = piles[randomPile] - (rand() % piles[randomPile] + 1);
+                bestMove = (rand() % piles[randomPile] + 1);
+                bestPile = randomPile;
+                piles[randomPile] = piles[randomPile] - bestMove;
             }
 
             cout << "\nComputer removes " << bestMove << " sticks from pile " << bestPile + 1 << ".\n";
