@@ -90,6 +90,7 @@ printBoard(heuristicBoard)
 
 #https://stackoverflow.com/questions/45945254/make-a-88-chessboard-in-pygame-with-python
 
+#3b: Make a prettier version of the output
 pygame.init()
 S_WIDTH = 700
 S_LENGTH = 700

@@ -182,7 +182,7 @@ int main() {
             } else {
                 safePile = false;
 
-                while(safePile) {
+                while(!safePile) {
                     randomPile = rand() % pileAmt;
                     if(piles[randomPile] != 0) {
                         safePile = true;
