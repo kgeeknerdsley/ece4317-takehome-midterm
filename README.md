@@ -1,5 +1,6 @@
 # ECE 4317 Takehome Midterm
 by Kevin Worsley
+
 3b and 3c assisted by Cristian Mejia
 
 * gain-calculator.cpp: For question 4
