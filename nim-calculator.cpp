@@ -1,3 +1,6 @@
+//For question 1c, by Kevin Worsley
+//ECE 4317 Takehome Midterm, Fall 2020
+
 #include <iostream>
 
 using namespace std;
