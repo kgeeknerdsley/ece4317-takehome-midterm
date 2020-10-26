@@ -1,3 +1,6 @@
+//For question 2, by Kevin Worsley
+//ECE 4317 Takehome Midterm, Fall 2020
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
