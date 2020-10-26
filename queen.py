@@ -1,3 +1,7 @@
+#For question 3b and 3c, by Kevin Worsley
+#Debugging and verification by Cristian Mejia
+#ECE 4317 Takehome Midterm, Fall 2020
+
 class Queen:
     def __init__(self, r, c, n):
         self.rowPos = r
